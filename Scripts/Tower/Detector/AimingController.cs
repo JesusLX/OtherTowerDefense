@@ -51,7 +51,7 @@ public class AimingController : MonoBehaviour {
                 Quaternion rotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * aimSpeed);
             } else if (targetList != null && targetList.Count > 0) {
-                targetList.RemoveAll(obj => !obj.activeSelf);
+                targetList.RemoveAll(obj => obj == null || !obj.activeSelf);
                 SetTarget(targetList);
             }
             yield return null;

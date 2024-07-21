@@ -281,7 +281,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detector: {fileID: 7698990455954482204}
   aimingController: {fileID: 5723950061334067212}
-  shooter: {fileID: 0}
+  shooter: {fileID: 3273184268965053621}
+  damageStats: {fileID: 11400000, guid: df1efed61c808714c8f7a2893532f6e0, type: 2}
 --- !u!1 &7822729160525073496
 GameObject:
   m_ObjectHideFlags: 0

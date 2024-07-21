@@ -41,14 +41,13 @@ public class Damageable : MonoBehaviour {
         }
     }
     private Damage hitShield(Damage damage) {
-        if (damage.ignoreShield) {
-            return damage;
+        if (damage.ignoreShield || damage.damage <= currentShield) {
+            currentShield -= damage.damage;
+            damage.damage = 0;
+        } else {
+            damage.damage -= currentShield;
+            currentShield = 0;
         }
-        var currHit = damage.damage - this.currentShield;
-        var shield = this.currentShield - damage.damage;
-
-        damage.damage = currHit > 0 ? currHit : 0;
-        this.currentShield = shield > 0 ? shield : 0;
         shieldBar.ChangeFill(maxShield, currentShield);
         return damage;
     }
@@ -60,10 +59,7 @@ public class Damageable : MonoBehaviour {
         return damage;
     }
     private Damage hitDamage(Damage damage) {
-        currentHealth -= damage.damage;
-        if (currentHealth < 0) {
-            currentHealth = 0;
-        }
+        currentHealth = Mathf.Max(currentHealth - damage.damage, 0);
         healthBar.ChangeFill(maxHealth, currentHealth);
 
         return damage;

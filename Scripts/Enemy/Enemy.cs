@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using PiscolSystems.Pools;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -17,14 +16,15 @@ public class Enemy : MonoBehaviour
         damageable = GetComponent<Damageable>();
         moveToPoint = GetComponent<MoveToPoint>();
     }
-    private void Start() {
-        Init();
-    }
-    public void Init() {
+    
+    public void Init(Point target) {
         damageable.Init();
+        moveToPoint.SetTargetPoint(target);
         moveToPoint.StartMoving();
     }
     public void Die(IAttacker attacker) {
         this.gameObject.SetActive(false);
+        this.gameObject.GetComponent<PoolItem>().Kill();
     }
+    
 }

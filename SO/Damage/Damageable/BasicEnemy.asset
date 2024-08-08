@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307e178aa28acc34b81358eb57f6d4e3, type: 3}
   m_Name: BasicEnemy
   m_EditorClassIdentifier: 
-  Health: 10
+  Health: 5
   Shield: 0
   ArmorPercertange: 0

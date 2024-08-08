@@ -8,7 +8,7 @@ public class MortarBullet : Bullet {
     private Vector3 startPost;
     public float smooth = 5f;
     public float count = 0;
-    public override void Shoot(Damage damage, IAttacker attacker) {
+    public override void Shoot(Damage damage, TowerController attacker) {
         base.Shoot(damage, attacker);
 
         if (target != null) {

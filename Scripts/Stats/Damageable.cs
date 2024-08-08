@@ -15,7 +15,7 @@ public class Damageable : MonoBehaviour {
 
     public DamageableStats stats;
 
-    public UnityEvent<IAttacker> onDied;
+    public UnityEvent<IAttacker, Damageable> onDied;
     public FillBar healthBar;
     public FillBar shieldBar;
 
@@ -37,18 +37,18 @@ public class Damageable : MonoBehaviour {
         damage = hitArmor(damage);
         damage = hitDamage(damage);
         if (currentHealth <= 0) {
-            onDied?.Invoke(attacker);
+            onDied?.Invoke(attacker, this);
         }
     }
     private Damage hitShield(Damage damage) {
-        if (damage.ignoreShield || damage.damage <= currentShield) {
-            currentShield -= damage.damage;
-            damage.damage = 0;
-        } else {
-            damage.damage -= currentShield;
-            currentShield = 0;
+        if (!damage.ignoreShield) {
+            if (currentShield > 0) {
+                var shieldDamaged = currentShield - damage.damage;
+                damage.damage = Mathf.Max(currentShield - damage.damage, 0);
+                currentShield = Mathf.Max(shieldDamaged, 0);
+                shieldBar.ChangeFill(maxShield, currentShield);
+            }
         }
-        shieldBar.ChangeFill(maxShield, currentShield);
         return damage;
     }
     private Damage hitArmor(Damage damage) {

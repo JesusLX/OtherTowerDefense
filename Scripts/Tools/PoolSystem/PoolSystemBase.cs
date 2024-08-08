@@ -100,15 +100,15 @@ namespace PiscolSystems.Pools {
             if (resetRigidbody) {
                 Rigidbody rb;
                 if (poolItem.GameObject.TryGetComponent<Rigidbody>(out rb)) {
-                    rb.velocity = Vector3.zero;
+                    rb.linearVelocity = Vector3.zero;
                     rb.angularVelocity = Vector3.zero;
-                    rb.angularDrag = 0;
-                    Debug.Log(rb.velocity.sqrMagnitude + " " + rb.angularVelocity);
+                    rb.angularDamping = 0;
+                    Debug.Log(rb.linearVelocity.sqrMagnitude + " " + rb.angularVelocity);
                 }
                 Rigidbody2D rb2d;
                 if (poolItem.GameObject.TryGetComponent<Rigidbody2D>(out rb2d)) {
-                    rb2d.velocity = Vector3.zero;
-                    rb2d.angularDrag = 0;
+                    rb2d.linearVelocity = Vector3.zero;
+                    rb2d.angularDamping = 0;
                     rb2d.angularVelocity = 0;
                 }
 

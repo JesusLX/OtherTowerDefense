@@ -12,13 +12,13 @@ public class EnemyDestroyer :  MonoBehaviour, IAttacker
         Debug.Log(collision, collision.gameObject);
         Enemy enemy;
         if (collision.gameObject.TryGetComponent(out enemy)) {
-            enemy.Die(this);
+            enemy.Die(this,enemy.GetComponent<Damageable>());
         }
     }
     private void OnTriggerEnter(Collider other) {
         Enemy enemy;
         if (other.gameObject.TryGetComponent(out enemy)) {
-            enemy.Die(this);
+            enemy.Die(this, enemy.GetComponent<Damageable>());
         }
     }
 }

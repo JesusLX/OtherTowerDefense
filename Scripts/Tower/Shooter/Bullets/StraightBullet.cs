@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class StraightBullet : Bullet {
 
-    public override void Shoot(Damage damage, IAttacker attacker) {
+    public override void Shoot(Damage damage, TowerController attacker) {
         base.Shoot(damage, attacker);
         if (target != null) {
             this.transform.LookAt(target.transform.position);
@@ -13,4 +13,5 @@ public class StraightBullet : Bullet {
     protected override void Move() {
         transform.position += transform.forward * speed * Time.deltaTime;
     }
+   
 }

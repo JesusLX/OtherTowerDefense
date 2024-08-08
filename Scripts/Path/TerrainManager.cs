@@ -5,10 +5,18 @@ using UnityEngine;
 
 public class TerrainManager : Singleton<TerrainManager> {
     public List<GameObject> terrains;
+    public GameObject endTerrain;
 
     public TerrainChecker terrainChecker;
     public float terrainSize = 20f; // Tamaño del terreno (asumimos cuadrado)
 
+    private void Start() {
+        Init();
+    }
+    public void Init() {
+        GameObject newTerrain = Instantiate(endTerrain, transform.position, transform.rotation, transform);
+StartCoroutine(CallSpawnFromAllDoors());
+    }
     public void OnDoorClicked(Door clickedDoor) {
         terrainChecker.transform.position = clickedDoor.terrain.transform.position;
         Vector3 targetPosition = CalculatePosition(clickedDoor, terrainChecker.gameObject);
@@ -47,6 +55,9 @@ public class TerrainManager : Singleton<TerrainManager> {
         //lastTerrain.DeactiveOcupedDoors();
         newTerrain.DeactiveOcupedDoors();
         newTerrain.DeactiveTouchedOcupedDoors();
+        SpawnFromAllDoors();
+    }
+    public void SpawnFromAllDoors() {
         var spawners = FindObjectsByType<Spawner>(FindObjectsInactive.Exclude, FindObjectsSortMode.InstanceID);
         foreach (var spawner in spawners) {
             spawner.Spawn();
@@ -232,6 +243,13 @@ public class TerrainManager : Singleton<TerrainManager> {
                 terrain.OnDoorClicked(door);
             }
 
+        }
+       
+    }
+    private IEnumerator CallSpawnFromAllDoors(){
+        while (true) {
+        yield return new WaitForSeconds(5);
+        SpawnFromAllDoors();
         }
     }
 }

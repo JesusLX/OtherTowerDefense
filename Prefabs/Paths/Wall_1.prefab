@@ -60,6 +60,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -97,7 +98,7 @@ GameObject:
   - component: {fileID: 3544118257872390251}
   - component: {fileID: 9044680094867072059}
   - component: {fileID: 4668530715155780644}
-  - component: {fileID: -7924430753126474752}
+  - component: {fileID: -2370875019983267347}
   m_Layer: 8
   m_Name: Wall_1
   m_TagString: Untagged
@@ -148,6 +149,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -192,9 +194,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-7924430753126474752
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!114 &-2370875019983267347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -203,9 +205,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6145054940900633254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7094fe717f0395a4fb1c75341024f29c, type: 3}
+  m_Script: {fileID: 11500000, guid: e367135abf95aba4c8b8011cceee6e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wall1: {fileID: 6145054940900633254}
-  wall2: {fileID: 6145054940900633254, guid: 8326f46091a606a469d6380c24e1a9f6, type: 3}
-  wall3: {fileID: 6145054940900633254, guid: 7170a343db987f04491fd44333e7cbd7, type: 3}

@@ -36,6 +36,19 @@ public class BuyTowerButton : MonoBehaviour {
         this.publicName = name;
         nameText.text = name;
     }
+    public void SetRadius(float radius) {
+        this.radius = radius;
+    }
+    public void SetId(string id) {
+        this.id = id;
+    }
+    public void SetInfo(TowerController.TowerInfo info) {
+        SetId(info.id);
+        SetName(info.name);
+        SetPrice(info.price);
+        SetImage(info.image);
+        SetRadius(info.range);
+    }
 
     public void ButtonClicked() {
         HoverController.Instance.Activate();
@@ -50,21 +63,20 @@ public class BuyTowerButton : MonoBehaviour {
     }
     void PlaceAbove(GameObject objectToPlace, GameObject targetObject) {
         // Obtener el MeshRenderer del objeto objetivo
-        MeshRenderer targetRenderer = targetObject.GetComponent<MeshRenderer>();
+        HoverPlatform targetRenderer = targetObject.GetComponent<HoverPlatform>();
         if (targetRenderer == null) {
             Debug.LogError("El objeto objetivo no tiene un MeshRenderer.");
             return;
         }
 
-        // Obtener las extensiones del objeto objetivo
-        Vector3 targetExtents = targetRenderer.bounds.extents;
+     
 
         // Obtener la posición del objeto objetivo
         Vector3 targetPosition = targetObject.transform.position;
 
         // Calcular la nueva posición para colocar el objeto justo por encima del objeto objetivo
         Vector3 newPosition = targetPosition;
-        newPosition.y += targetExtents.y;
+        newPosition.y += targetRenderer.Height;
 
         // Obtener el MeshRenderer del objeto a colocar
         MeshRenderer placeRenderer = objectToPlace.GetComponent<MeshRenderer>();

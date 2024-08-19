@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class TowerController : MonoBehaviour, IAttacker {
     public Shooter shooter;
     public Damage damage;
     public DamageStat damageStats;
+    public TowerInfo info;
     void OnEnable() {
         // Suscribirse a los eventos del detector
         detector.OnObjectDetected.AddListener(aimingController.SetTarget);
@@ -38,5 +40,22 @@ public class TowerController : MonoBehaviour, IAttacker {
         if (aimingController != null) {
             shooter.Init(damage,this);
         }
+       
+    }
+
+    public void RefreshInfo() {
+        Debug.Log("Rango " + info.range);
+        if (info.range == 0) {
+            info.range = detector.detectionRadius;
+        }
+    }
+
+    [Serializable]
+    public class TowerInfo {
+        public string id;
+        public string name;
+        public int price;
+        public float range;
+        public Sprite image;
     }
 }

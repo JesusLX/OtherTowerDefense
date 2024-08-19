@@ -105,6 +105,7 @@ MonoBehaviour:
   shotsPerRound: 1
   randomTarget: 0
   target: {fileID: 0}
+  cannonPosition: []
   bulletsPool: {fileID: 11400000, guid: 18ad68a58f8b67b479535655fe560d23, type: 2}
 --- !u!1 &1813757711580550466
 GameObject:
@@ -396,6 +397,12 @@ MonoBehaviour:
   aimingController: {fileID: 5723950061334067212}
   shooter: {fileID: 3273184268965053621}
   damageStats: {fileID: 11400000, guid: bca9c87f2a22b5d4fb979cdc10f3b0c2, type: 2}
+  info:
+    id: static_tower
+    name: Lanzallamas
+    price: 5
+    range: 0
+    image: {fileID: 0}
 --- !u!114 &-2818366903613485755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,4 +521,5 @@ MonoBehaviour:
   shotsPerRound: 1
   randomTarget: 0
   target: {fileID: 0}
+  cannonPosition: []
   bulletsPool: {fileID: 11400000, guid: 18ad68a58f8b67b479535655fe560d23, type: 2}

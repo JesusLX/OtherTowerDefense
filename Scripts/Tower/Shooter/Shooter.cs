@@ -1,5 +1,6 @@
 using PiscolSystems.Pools;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Shooter : MonoBehaviour {
@@ -9,6 +10,7 @@ public class Shooter : MonoBehaviour {
     public int shotsPerRound;
     public bool randomTarget;
     public GameObject target;
+    public List<Transform> cannonPosition;
     public PoolSystemBase bulletsPool;
     private Coroutine shootCoroutine;
     private Damage damage;
@@ -55,7 +57,11 @@ public class Shooter : MonoBehaviour {
                 for (int i = 0; i < shotsPerRound; i++) {
                     OnPreShootAnimation();
                     OnShootAnimation();
-                    var bullet = bulletsPool.Play(null, transform.position, Quaternion.identity).GameObject.GetComponent<Bullet>();
+                    Transform shootTransform = transform;
+                    if (cannonPosition.Count > 0) {
+                        shootTransform = cannonPosition[Random.Range(0, cannonPosition.Count-1)];
+                    }
+                    var bullet = bulletsPool.Play(null, shootTransform.position, Quaternion.identity).GameObject.GetComponent<Bullet>();
                     if (randomTarget) {
                         if (attacker.detector.DetectedObjects.Count > 0) {
                             var tmpTarget = attacker.detector.DetectedObjects[Random.Range(0, attacker.detector.DetectedObjects.Count - 1)];

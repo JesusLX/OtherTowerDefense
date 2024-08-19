@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4aefb9a7c720d145ac4451b2d113c80, type: 3}
   m_Name: StaticBullet
   m_EditorClassIdentifier: 
-  damage: 0.1
+  damage: 0.01
   ignoreArmor: 1
   ignoreShield: 0

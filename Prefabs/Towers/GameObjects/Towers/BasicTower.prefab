@@ -290,6 +290,12 @@ MonoBehaviour:
   aimingController: {fileID: 5723950061334067212}
   shooter: {fileID: 3273184268965053621}
   damageStats: {fileID: 11400000, guid: df1efed61c808714c8f7a2893532f6e0, type: 2}
+  info:
+    id: basic_tower
+    name: Basica
+    price: 0
+    range: 0
+    image: {fileID: 0}
 --- !u!114 &-2818366903613485755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,6 +413,7 @@ MonoBehaviour:
   shotsPerRound: 1
   randomTarget: 0
   target: {fileID: 0}
+  cannonPosition: []
   bulletsPool: {fileID: 11400000, guid: e3c6a8f33571b91499055282fe0e9a11, type: 2}
 --- !u!1 &7822729160525073496
 GameObject:
@@ -514,4 +521,5 @@ MonoBehaviour:
   shotsPerRound: 1
   randomTarget: 0
   target: {fileID: 0}
+  cannonPosition: []
   bulletsPool: {fileID: 11400000, guid: e3c6a8f33571b91499055282fe0e9a11, type: 2}

@@ -254,6 +254,7 @@ MonoBehaviour:
   - gold_trail
   particles:
   - {fileID: 0}
+  skyStaticTime: 0.25
 --- !u!1 &5518018982617095934
 GameObject:
   m_ObjectHideFlags: 0

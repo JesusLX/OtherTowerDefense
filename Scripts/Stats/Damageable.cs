@@ -55,7 +55,7 @@ public class Damageable : MonoBehaviour {
         if (damage.ignoreArmor) {
             return damage;
         }
-        damage.damage -= damage.damage * armorPercentage;
+        damage.damage -= Mathf.Max(damage.damage * armorPercentage, 0);
         return damage;
     }
     private Damage hitDamage(Damage damage) {

@@ -5,6 +5,7 @@ using UnityEditor.Purchasing;
 using UnityEngine;
 using static Point;
 
+[ExecuteInEditMode]
 public class BlockTerrain : MonoBehaviour {
     public List<Door> doors;
 
@@ -122,6 +123,23 @@ public class BlockTerrain : MonoBehaviour {
         var exitDoor = GetExitDoor().point;
         InvertPointChain(exitDoor);
     }
+    [ContextMenu("GetBackPath")]
+    public void GetBackPath() {
+        
+        var points = transform.GetComponentsInChildren<Point>();
+        Debug.Log(points.Length);
+        foreach (var point in points) {
+            point.previousPoints.Clear();
+        }
+        foreach (var point in points)
+        {
+            foreach (var nextPoint in point.points)
+            {
+                Debug.Log(nextPoint,nextPoint);
+                nextPoint.previousPoints.Add(point);
+            }
+        }
+    }
     public static List<Point> InvertPointChain(Point startPoint) {
         List<Point> originalChain = new List<Point>();
         HashSet<Point> visitedPoints = new HashSet<Point>();
@@ -135,6 +153,8 @@ public class BlockTerrain : MonoBehaviour {
             originalChain[i].points.Clear();
             if (i + 1 < originalChain.Count) {
                 originalChain[i].points.Add(originalChain[i + 1]);
+                //if(originalChain[i + 1].previousPoints.Count == 0)
+                originalChain[i + 1].previousPoints.Add(originalChain[i]);
             }
         }
 

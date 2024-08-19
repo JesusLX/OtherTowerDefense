@@ -44,14 +44,14 @@ public class AimingController : MonoBehaviour {
 
     private IEnumerator AimCoroutine() {
         while (true) {
-            if (currentTarget != null && currentTarget.activeSelf) {
+            if (currentTarget != null && currentTarget.activeInHierarchy) {
                 // Apunta hacia el objetivo
                 Debug.DrawRay(transform.position, transform.forward * 5, Color.green);
                 Vector3 direction = currentTarget.transform.position - transform.position;
                 Quaternion rotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * aimSpeed);
             } else if (targetList != null && targetList.Count > 0) {
-                targetList.RemoveAll(obj => obj == null || !obj.activeSelf);
+                targetList.RemoveAll(obj => obj == null || !obj.activeInHierarchy);
                 SetTarget(targetList);
             }
             yield return null;

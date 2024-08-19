@@ -72,7 +72,6 @@ public abstract class Bullet : MonoBehaviour {
     }
 
     protected virtual void OnHitTarget(Damageable hitTarget) {
-        Debug.Log(hitTarget, hitTarget);
         hitTarget.getHit(this.damage, this.attacker);
     }
     private void Update() {

@@ -5,12 +5,16 @@ using UnityEngine.Events;
 
 
 public class Point : MonoBehaviour {
-    public List<Point> points = new List<Point>();
+    public List<Point> points;
+    public List<Point> previousPoints;
     public UnityEvent<Point> OnGetNextPoint;
     public enum PointType {
         Path, Door, Intersection
     }
     public PointType pointType = PointType.Path;
+    public void AddPoint(Point point) {
+        points.Add(point);
+    }
     public Point GetNextPoint(GameObject gameObject) {
         Point point = null;
         if (points.Count > 0) {
@@ -22,5 +26,11 @@ public class Point : MonoBehaviour {
         }
 
         return point;
+    }
+    public Point GetPreviousPoint() {
+        if (previousPoints.Count > 0) {
+            return previousPoints[Random.Range(0, previousPoints.Count - 1)];
+        }
+        return null;
     }
 }

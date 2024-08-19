@@ -14,8 +14,11 @@ public class Spawner : MonoBehaviour
     public float timeBetweenRafagas = 0.5f;
 
     [ContextMenu("Spawn")]
-    public void Spawn(){
+    public void Spawn() {
         StartCoroutine(SpawnRafaga());
+    }
+    public void Spawn(string key) {
+        EnemyManager.Instance.Spawn(key,this.transform).GetComponent<Enemy>().Init(target);
     }
     public IEnumerator SpawnRafaga() {
         for (int i = 0; i < rafagaCount; i++) {

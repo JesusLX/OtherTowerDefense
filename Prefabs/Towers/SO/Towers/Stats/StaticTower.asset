@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a58c5d83629d1d14b8254e4423a05ace, type: 3}
   m_Name: StaticTower
   m_EditorClassIdentifier: 
-  timeBetweenShots: 0.01
-  timeBetweenRounds: 1
-  shotsPerRound: 100
+  timeBetweenShots: 1
+  timeBetweenRounds: 0.25
+  shotsPerRound: 1

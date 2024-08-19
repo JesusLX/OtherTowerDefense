@@ -24,7 +24,7 @@ namespace PiscolSystems.Pools {
         public int maxCapacity = 1000;
         [Tooltip("GameObject to spawn")]
         [SerializeField]
-        private PoolItem prefab;
+        public PoolItem prefab;
         public bool resetRigidbody = false;
         internal IObjectPool<IPoolItem> psPool;
         internal bool collectionChecks = true;

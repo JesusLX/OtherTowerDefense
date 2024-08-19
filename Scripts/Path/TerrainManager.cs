@@ -15,7 +15,7 @@ public class TerrainManager : Singleton<TerrainManager> {
     }
     public void Init() {
         GameObject newTerrain = Instantiate(endTerrain, transform.position, transform.rotation, transform);
-StartCoroutine(CallSpawnFromAllDoors());
+        StartCoroutine(CallSpawnFromAllDoors());
     }
     public void OnDoorClicked(Door clickedDoor) {
         terrainChecker.transform.position = clickedDoor.terrain.transform.position;
@@ -23,10 +23,11 @@ StartCoroutine(CallSpawnFromAllDoors());
         List<CollisionInfo> collisions = terrainChecker.Check(targetPosition);
         //// Instancia el nuevo terreno
         var terrainPrefab = GetTerrain(collisions);
-        if(terrainPrefab == null ) {
+        if (terrainPrefab == null) {
             return;
         }
         GameObject newTerrain = Instantiate(terrainPrefab, clickedDoor.terrain.transform.position, clickedDoor.transform.rotation, transform);
+        Debug.Log("El terreno", newTerrain);
         //// Ajusta la posición del nuevo terreno para que se alinee con la puerta seleccionada
         targetPosition = CalculatePosition(clickedDoor, newTerrain);
         newTerrain.transform.position = targetPosition;
@@ -37,17 +38,20 @@ StartCoroutine(CallSpawnFromAllDoors());
             }
         }
         //// Calcula la rotación necesaria para alinear las puertas
-        if (false && newTerrain.GetComponent<BlockTerrain>().GetActiveDoorsCount() == 1) {
-            StartCoroutine(CalculateRotationCoroutine(clickedDoor, newTerrain, doorCount));
-        } else {
-            CalculateRotation(clickedDoor, newTerrain, doorCount);
-            var newExitDoor = GetExitDoor(clickedDoor, newTerrain);
+        //if (false && newTerrain.GetComponent<BlockTerrain>().GetActiveDoorsCount() == 1) {
+        //    StartCoroutine(CalculateRotationCoroutine(clickedDoor, newTerrain, doorCount));
 
-            newExitDoor.point.points.Add(clickedDoor.point);
-            //Debug.Log("Entrando a DeactiveOcupedDoors.---------------------", newTerrain);
+        //} else {
+        CalculateRotation(clickedDoor, newTerrain, doorCount);
+        var newExitDoor = GetExitDoor(clickedDoor, newTerrain);
 
-            StartCoroutine(DeactiveDoors(newTerrain.GetComponent<BlockTerrain>(), clickedDoor.terrain));
-        }
+        newExitDoor.point.AddPoint(clickedDoor.point);
+        clickedDoor.point.previousPoints.Add(newExitDoor.point);
+        Debug.Log("Clicker door "+clickedDoor.point.previousPoints.Count,clickedDoor.point);
+        //Debug.Log("Entrando a DeactiveOcupedDoors.---------------------", newTerrain);
+
+        StartCoroutine(DeactiveDoors(newTerrain.GetComponent<BlockTerrain>(), clickedDoor.terrain));
+        //}
 
     }
     public IEnumerator DeactiveDoors(BlockTerrain newTerrain, BlockTerrain lastTerrain) {
@@ -55,7 +59,14 @@ StartCoroutine(CallSpawnFromAllDoors());
         //lastTerrain.DeactiveOcupedDoors();
         newTerrain.DeactiveOcupedDoors();
         newTerrain.DeactiveTouchedOcupedDoors();
-        SpawnFromAllDoors();
+        //  EnemyManager.Instance.SpawnGroup(EnemyManager.Instance.GetRandomGroup());
+    }
+    public Spawner GetRandomSpawner() {
+        var spawners = FindObjectsByType<Spawner>(FindObjectsInactive.Exclude, FindObjectsSortMode.InstanceID);
+        if (spawners.Length == 0) {
+            return null;
+        }
+        return spawners[Random.Range(0, spawners.Length)];
     }
     public void SpawnFromAllDoors() {
         var spawners = FindObjectsByType<Spawner>(FindObjectsInactive.Exclude, FindObjectsSortMode.InstanceID);
@@ -78,9 +89,8 @@ StartCoroutine(CallSpawnFromAllDoors());
                 wallCount++;
                 wallDirections.Add(collision.direction);
             }
-                Debug.Log(collision + " " + collision.objectType + " " + collision.point);
+            Debug.Log(collision + " " + collision.objectType + " " + collision.point);
         }
-        Debug.Log("doorCount = " + doorCount + ", wallCount = " + wallCount);
         // Basado en doorCount y wallCount, decide qué tipo de terreno instanciar
         List<GameObject> posiblesTerrains;
         if (wallCount == 3) {
@@ -92,16 +102,21 @@ StartCoroutine(CallSpawnFromAllDoors());
         } else if (doorCount == 1 && wallCount == 1) {
             posiblesTerrains = terrains.FindAll(t => {
                 var terrain = t.GetComponent<BlockTerrain>();
-                return (terrain.GetDoorsCount() == 2 || terrain.GetDoorsCount() == 3) && (CollisionInfo.AreDirectionsOpposite(wallDirections[0], doorDirections[0]) != terrain.HasOppositeDoors());
+                //Debug.Log("Oposite doors " + CollisionInfo.AreDirectionsOpposite(wallDirections[0], doorDirections[0]));
+                if (!CollisionInfo.AreDirectionsOpposite(wallDirections[0], doorDirections[0])) {
+                    return ((terrain.GetDoorsCount() == 2 || terrain.GetDoorsCount() == 3) && terrain.HasOppositeDoors());
+                } else {
+                    return (terrain.GetDoorsCount() == 2 || terrain.GetDoorsCount() == 3) && !terrain.HasOppositeDoors();
+                }
             }
            );
         } else if (doorCount == 1 && wallCount == 2) {
             posiblesTerrains = terrains.FindAll(t => {
                 var terrain = t.GetComponent<BlockTerrain>();
                 if (CollisionInfo.AreDirectionsOpposite(wallDirections[0], wallDirections[1])) {
-                    return (terrain.GetDoorsCount() == 2 && terrain.HasOppositeDoors()) || terrain.GetDoorsCount() == 3;
+                    return (terrain.GetDoorsCount() == 2 && terrain.HasOppositeDoors());
                 } else {
-                    return terrain.GetDoorsCount() == 2 && !terrain.HasOppositeDoors() || terrain.GetDoorsCount() == 3 ;
+                    return terrain.GetDoorsCount() == 2 && !terrain.HasOppositeDoors();
                 }
             }
             );
@@ -147,7 +162,9 @@ StartCoroutine(CallSpawnFromAllDoors());
         }
         if (posiblesTerrains == null)
             return null;
-        return posiblesTerrains[Random.Range(0, posiblesTerrains.Count - 1)];
+        var newTerrain = posiblesTerrains[Random.Range(0, posiblesTerrains.Count - 1)];
+        Debug.Log("doorCount = " + doorCount + ", wallCount = " + wallCount, newTerrain);
+        return newTerrain;
 
 
     }
@@ -201,10 +218,6 @@ StartCoroutine(CallSpawnFromAllDoors());
         var tmpTouchCount = touchDoors;
         var checkDoor = terrain.CheckDoors(tmpTouchCount);
         var touchDoor = terrain.TouchDoor(clickedDoor);
-        //Debug.Log("ANTES Volteando " + doorsCount, newTerrain);
-        //Debug.Log("ANTES terrain.CheckDoors() " + checkDoor, newTerrain);
-        //Debug.Log("ANTES terrain.TouchDoor(clickedDoor) " + touchDoor, newTerrain);
-        //Debug.Log("ANTES  ((terrain.CheckDoors(terrain.GetActiveDoors().Count) && terrain.TouchDoor(clickedDoor) != null)) = " + ((checkDoor && touchDoor != null)).ToString(), newTerrain);
         while ((checkDoor && touchDoor != null) == false) {
             doorsCount--;
             if (doorsCount < 0) {
@@ -214,15 +227,7 @@ StartCoroutine(CallSpawnFromAllDoors());
             tmpTouchCount = touchDoors;
             checkDoor = terrain.CheckDoors(tmpTouchCount);
             touchDoor = terrain.TouchDoor(clickedDoor);
-            //Debug.Log("DENTRO Volteando = " + doorsCount, newTerrain);
-            //Debug.Log("DENTRO terrain.CheckDoors() = " + checkDoor, newTerrain);
-            //Debug.Log("DENTRO terrain.TouchDoor(clickedDoor) = " + touchDoor, newTerrain);
-            //Debug.Log("DENTRO  ((terrain.CheckDoors(terrain.GetActiveDoors().Count) && terrain.TouchDoor(clickedDoor) != null)) = " + (checkDoor && touchDoor != null).ToString(), newTerrain);
         }
-        //Debug.Log("DESPUES Volteando = " + doorsCount, newTerrain);
-        //Debug.Log("DESPUES terrain.CheckDoors() = " + checkDoor, newTerrain);
-        //Debug.Log("DESPUES terrain.TouchDoor(clickedDoor) = " + touchDoor, newTerrain);
-        //Debug.Log("DESPUES ((terrain.CheckDoors(terrain.GetActiveDoors().Count) && terrain.TouchDoor(clickedDoor) != null)) = " + (checkDoor && touchDoor != null).ToString(), newTerrain);
     }
 
     private Vector3 CalculatePosition(Door clickedDoor, GameObject newTerrain) {
@@ -244,12 +249,12 @@ StartCoroutine(CallSpawnFromAllDoors());
             }
 
         }
-       
+
     }
-    private IEnumerator CallSpawnFromAllDoors(){
+    private IEnumerator CallSpawnFromAllDoors() {
         while (true) {
-        yield return new WaitForSeconds(5);
-        SpawnFromAllDoors();
+            yield return new WaitForSeconds(10);
+            EnemyManager.Instance.SpawnGroup(EnemyManager.Instance.GetRandomGroup());
         }
     }
 }

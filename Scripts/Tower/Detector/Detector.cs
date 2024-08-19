@@ -34,7 +34,7 @@ public class Detector : MonoBehaviour {
         }
     }
     public List<GameObject> GetDetectedObjects() {
-        detectedObjects.RemoveAll(x => !x.activeSelf);
+        detectedObjects.RemoveAll(x => !x.activeInHierarchy);
         return detectedObjects;
     }
     private void OnTriggerEnter(Collider other) {
@@ -61,7 +61,7 @@ public class Detector : MonoBehaviour {
             if (((1 << other.gameObject.layer) & detectionLayer) != 0) {
                 if (detectedObjects.Contains(other.gameObject)) {
                     detectedObjects.Remove(other.gameObject);
-                    detectedObjects.RemoveAll(x => !x.gameObject.activeSelf);
+                    detectedObjects.RemoveAll(x => !x.activeInHierarchy);
                     OnObjectLost?.Invoke(detectedObjects);
                     Damageable tmpDmg;
                     if (other.TryGetComponent<Damageable>(out tmpDmg)) {

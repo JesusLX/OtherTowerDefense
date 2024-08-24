@@ -16,5 +16,5 @@ MonoBehaviour:
   restParent: {fileID: 0}
   defaultCapacity: 100
   maxCapacity: 1000
-  prefab: {fileID: -2818366903613485755, guid: 1470cdab47e90c24d90893c73a2f1688, type: 3}
+  prefab: {fileID: -2818366903613485755, guid: b1bdde04a706ddf4e876fca169b59158, type: 3}
   resetRigidbody: 0

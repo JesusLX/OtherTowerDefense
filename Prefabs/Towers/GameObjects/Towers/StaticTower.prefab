@@ -396,6 +396,10 @@ MonoBehaviour:
   detector: {fileID: 7698990455954482204}
   aimingController: {fileID: 5723950061334067212}
   shooter: {fileID: 3273184268965053621}
+  damage:
+    damage: 0
+    ignoreArmor: 0
+    ignoreShield: 0
   damageStats: {fileID: 11400000, guid: bca9c87f2a22b5d4fb979cdc10f3b0c2, type: 2}
   info:
     id: static_tower

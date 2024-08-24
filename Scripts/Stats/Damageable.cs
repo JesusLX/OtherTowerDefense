@@ -43,9 +43,15 @@ public class Damageable : MonoBehaviour {
     private Damage hitShield(Damage damage) {
         if (!damage.ignoreShield) {
             if (currentShield > 0) {
+
                 var shieldDamaged = currentShield - damage.damage;
-                damage.damage = Mathf.Max(currentShield - damage.damage, 0);
+                if(shieldDamaged <= 0) {
+                    damage.damage = Mathf.Max(shieldDamaged, 0);
+                } else {
+                    damage.damage = 0;
+                }
                 currentShield = Mathf.Max(shieldDamaged, 0);
+
                 shieldBar.ChangeFill(maxShield, currentShield);
             }
         }

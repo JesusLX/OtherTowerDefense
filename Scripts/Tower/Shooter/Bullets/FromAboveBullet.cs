@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FromAboveBullet : Bullet {
+
+    [Header("FromAboveBullet Settings")]
     public float skyStaticTime = 0;
     public override void Shoot(Damage damage, TowerController attacker) {
         base.Shoot(damage, attacker);

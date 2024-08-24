@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class MoveToPoint : MonoBehaviour {
     public Point targetPoint;
-    public float speed = 5f;
+    public MovementStats movStat;
     public float stoppingDistance = 1f;
     public Vector3 offset = Vector3.zero;
 
@@ -29,9 +30,6 @@ public class MoveToPoint : MonoBehaviour {
         }
     }
 
-    public void SetSpeed(float newSpeed) {
-        speed = newSpeed;
-    }
 
     public void SetTargetPoint(Point newTargetPoint) {
         targetPoint = newTargetPoint;
@@ -64,10 +62,15 @@ public class MoveToPoint : MonoBehaviour {
                 }
             } else {
                 direction.Normalize();
-                transform.position += direction * speed * Time.deltaTime;
+                transform.position += direction * movStat.GetCurrentSpeed() * Time.deltaTime;
             }
 
             yield return null;
         }
+    }
+
+    public void SetStats(MovementStats movementStats) {
+        movStat = ScriptableObject.CreateInstance<MovementStats>();
+        movStat.Init(movementStats);
     }
 }

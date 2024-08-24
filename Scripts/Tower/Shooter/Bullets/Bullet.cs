@@ -3,7 +3,6 @@ using PiscolSystems.Pools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public abstract class Bullet : MonoBehaviour {
 
     public string endParticles;
@@ -22,6 +21,9 @@ public abstract class Bullet : MonoBehaviour {
     public List<string> particlesTrails;
     public List<ParticleSystem> particles;
     protected TowerController attacker;
+    [Header("Effect Settings")]
+    [SerializeField]
+    protected Effect effect;
     public virtual void Shoot(Damage damage, TowerController attacker) {
         timeAlive = 0f;
         targetsHit = 0;
@@ -73,6 +75,17 @@ public abstract class Bullet : MonoBehaviour {
 
     protected virtual void OnHitTarget(Damageable hitTarget) {
         hitTarget.getHit(this.damage, this.attacker);
+        SetEffect(hitTarget);
+    }
+    protected virtual void SetEffect(Damageable hitTarget) {
+        if (effect != null && effect.id != "") {
+            Effectable effectable;
+            if (hitTarget.gameObject.TryGetComponent(out effectable)) {
+                var _effect = (Effect)this.effect.Clone();
+                _effect.Init(hitTarget.GetComponent<IEffectable>(), attacker);
+                effectable.SetEffect(_effect);
+            }
+        }
     }
     private void Update() {
         if (target != null) {

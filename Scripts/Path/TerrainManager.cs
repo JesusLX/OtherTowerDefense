@@ -89,7 +89,6 @@ public class TerrainManager : Singleton<TerrainManager> {
                 wallCount++;
                 wallDirections.Add(collision.direction);
             }
-            Debug.Log(collision + " " + collision.objectType + " " + collision.point);
         }
         // Basado en doorCount y wallCount, decide qué tipo de terreno instanciar
         List<GameObject> posiblesTerrains;

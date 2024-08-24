@@ -44,7 +44,6 @@ public class TowerController : MonoBehaviour, IAttacker {
     }
 
     public void RefreshInfo() {
-        Debug.Log("Rango " + info.range);
         if (info.range == 0) {
             info.range = detector.detectionRadius;
         }

@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 6753837159345702400}
   - component: {fileID: 7186693426431316659}
   - component: {fileID: 3944700542513555119}
+  - component: {fileID: -7986021477783787980}
   m_Layer: 6
   m_Name: Boss0Enemy
   m_TagString: Untagged
@@ -160,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 0}
-  speed: 5
+  movStat: {fileID: 0}
   stoppingDistance: 1
   offset: {x: 0, y: 1, z: 0}
 --- !u!65 &8962034222628176417
@@ -241,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1598c4b590b54a04e993090ecda79448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementStats: {fileID: 11400000, guid: 7610ee6d02f287b4081c7d730b407f89, type: 2}
 --- !u!114 &3944700542513555119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +253,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b83d49329a2e99749a1c906b51d99aac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-7986021477783787980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7731345783904726150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55068a0e6a13fb64abaf9e86627fbd6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &713931672148246947

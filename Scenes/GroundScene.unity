@@ -591,7 +591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 821456394059952646, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       propertyPath: towerPools.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 821456394059952646, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       propertyPath: 'towerPools.Array.data[2]'
@@ -609,6 +609,10 @@ PrefabInstance:
       propertyPath: 'towerPools.Array.data[5]'
       value: 
       objectReference: {fileID: 11400000, guid: 7f8fc5508ddfcdd4dabf61554f3f2324, type: 2}
+    - target: {fileID: 821456394059952646, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
+      propertyPath: 'towerPools.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a05787f922bfea343b727dc97959338f, type: 2}
     - target: {fileID: 2341140031139967288, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -724,7 +728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2756022144551924323, guid: 54cee6647adfb2947905e9f79f561242, type: 3}
       propertyPath: pSPools.Array.size
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2756022144551924323, guid: 54cee6647adfb2947905e9f79f561242, type: 3}
       propertyPath: 'pSPools.Array.data[5]'
@@ -738,6 +742,18 @@ PrefabInstance:
       propertyPath: 'pSPools.Array.data[7]'
       value: 
       objectReference: {fileID: 11400000, guid: da795a6397427d044a9ed4a47f6cadab, type: 2}
+    - target: {fileID: 2756022144551924323, guid: 54cee6647adfb2947905e9f79f561242, type: 3}
+      propertyPath: 'pSPools.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ca84f6772cf9c8f4ebe42ca65baf5abc, type: 2}
+    - target: {fileID: 2756022144551924323, guid: 54cee6647adfb2947905e9f79f561242, type: 3}
+      propertyPath: 'pSPools.Array.data[9]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c14e597ef6ec1454f91ba8830fc88357, type: 2}
+    - target: {fileID: 2756022144551924323, guid: 54cee6647adfb2947905e9f79f561242, type: 3}
+      propertyPath: 'pSPools.Array.data[10]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 64bdd54bb8ced25498ba36cbbe2f8ff1, type: 2}
     - target: {fileID: 6696908129417850298, guid: 54cee6647adfb2947905e9f79f561242, type: 3}
       propertyPath: m_LocalPosition.x
       value: 558.67847

@@ -292,7 +292,7 @@ MonoBehaviour:
   damageStats: {fileID: 11400000, guid: 8595a2a861467c44e9d016703292e238, type: 2}
   info:
     id: sacred_tower
-    name: Sagrada
+    name: Sagrado
     price: 0
     range: 0
     image: {fileID: 0}

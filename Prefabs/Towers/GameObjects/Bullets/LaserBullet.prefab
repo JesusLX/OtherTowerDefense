@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5877018563576889447}
   - component: {fileID: 6198320935263144778}
   m_Layer: 0
-  m_Name: StaticBullet
+  m_Name: LaserBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,14 +135,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1af4998718dfe42965f0c2a7d02a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endParticles: 
-  startParticles: fire_breath
+  endParticles: basic_fire_start
+  startParticles: laser
   target: {fileID: 0}
   speed: 0
   lifetime: 1
   maxTargets: 2000
   particlesTrails: []
   particles: []
+  effect:
+    id: burn
+    initStat: {fileID: 11400000, guid: 70ec260e461ed7247ae1fb056f3b33a6, type: 2}
 --- !u!1 &5854589729653469646
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5041343704078875321
 Transform:
   m_ObjectHideFlags: 0
@@ -172,7 +175,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4027360976171069080}
@@ -208,7 +211,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d524e06ce5789794ab52044d9d9fb62e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

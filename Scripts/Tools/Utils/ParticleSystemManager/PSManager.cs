@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace LemonTree.ParticlesPool {
-    public partial class PSManager :Singleton<PSManager> {
+    public partial class PSManager : Singleton<PSManager> {
         public List<ParticleSystemPool> pSPools;
 
         [Header("Test")]
@@ -31,8 +31,8 @@ namespace LemonTree.ParticlesPool {
         public void TestPlay() {
             Play(
                 testId,
-                null ,
-                transform.position, 
+                null,
+                transform.position,
                 transform.rotation);
         }
         /// <summary>
@@ -40,7 +40,7 @@ namespace LemonTree.ParticlesPool {
         /// </summary>
         [ContextMenu("Test/PlayAttached")]
         public void TestPlayAttached() {
-            Play(testId, gameObject.transform,Vector3.zero,Quaternion.identity);
+            Play(testId, gameObject.transform, Vector3.zero, Quaternion.identity);
         }
 
         /// <summary>
@@ -52,13 +52,17 @@ namespace LemonTree.ParticlesPool {
         /// <param name="rotation">Rotation of the ParticleSystem</param>
         /// <returns>The ParticleSystem invoked</returns>
         public ParticleSystem Play(string poolId, Transform parent, Vector3 position, Quaternion rotation) {
-            if(position == null) {
-                position = Vector3.zero;
-            }
-            ParticleSystemPool pool = FindPool(poolId);
-            var ps = pool.Play(parent, position, rotation);
+            if (poolId != "") {
 
-            return ps.GetComponent<ParticleSystem>();
+                if (position == null) {
+                    position = Vector3.zero;
+                }
+                ParticleSystemPool pool = FindPool(poolId);
+                var ps = pool.Play(parent, position, rotation);
+
+                return ps.GetComponent<ParticleSystem>();
+            }
+            return null;
         }
 
         private ParticleSystemPool FindPool(string poolId) {

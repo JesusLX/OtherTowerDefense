@@ -217,10 +217,14 @@ MonoBehaviour:
   endParticles: blue_fire_start
   startParticles: blue_fire_start
   target: {fileID: 0}
-  speed: 10
+  speed: 15
   lifetime: 10
   maxTargets: 1
+  particlesTrails: []
   particles: []
+  effect:
+    id: 
+    initStat: {fileID: 0}
   body1: {fileID: 3175758788088896648}
   body2: {fileID: 5717980266795980148}
 --- !u!1 &5518018982617095934

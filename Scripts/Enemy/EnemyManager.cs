@@ -17,7 +17,7 @@ public class EnemyManager : Singleton<EnemyManager> {
         return enemy;
     }
     public EnemyGroup GetRandomGroup() {
-        return enemyGroups[Random.Range(0, enemyPools.Count - 1)];
+        return enemyGroups[Random.Range(0, enemyPools.Count)];
     }
     public void SpawnGroup(EnemyGroup group) {
         StartCoroutine(SpawnGroupCor(group));

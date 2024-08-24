@@ -15,6 +15,7 @@ public class DirectBullet : Bullet {
     }
     protected override IEnumerator Positione() {
         Vector3 targetPosition = transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(.5f, 2f), Random.Range(-2f, 2f));
+        //Vector3 targetPosition = attacker.transform.position+Vector3.up*3;
         Vector3 direction = (targetPosition - transform.position).normalized;
         float speed = 2f; // 1 segundos
         float startTime = Time.time;

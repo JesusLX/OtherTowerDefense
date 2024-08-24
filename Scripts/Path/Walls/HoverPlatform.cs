@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class HoverPlatform : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     private HoverController hoverController;
     public float height;
+    public GameObject occuped;
 
     void Start() {
         hoverController = HoverController.Instance;

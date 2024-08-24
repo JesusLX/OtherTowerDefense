@@ -1,5 +1,7 @@
-﻿using UnityEngine.PlayerLoop;
+﻿using System;
+using UnityEngine.PlayerLoop;
 
+[Serializable]
 public class Damage {
     public float damage;
     public bool ignoreArmor;

@@ -126,12 +126,15 @@ MonoBehaviour:
   endParticles: basic_fire_start
   startParticles: basic_fire_start
   target: {fileID: 0}
-  speed: 15
+  speed: 20
   lifetime: 3
   maxTargets: 3
   particlesTrails:
   - basic_fire
   particles: []
+  effect:
+    id: 
+    initStat: {fileID: 0}
 --- !u!114 &-5877018563576889447
 MonoBehaviour:
   m_ObjectHideFlags: 0

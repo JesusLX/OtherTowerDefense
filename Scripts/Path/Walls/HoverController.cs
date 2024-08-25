@@ -9,12 +9,15 @@ public class HoverController : Singleton<HoverController> {
 
     public void MoveHoverObject(Transform target) {
         if (IsActive) {
-            hoverObject.SetActive(true);
-            // Mueve el objeto flotante justo por encima del objeto objetivo
-            Vector3 newPosition = target.position;
-            //newPosition.y += target.GetComponent<Renderer>().bounds.extents.y + hoverObject.GetComponent<Renderer>().bounds.extents.y;
-            newPosition.y = target.GetComponent<HoverPlatform>().Height;
-            hoverObject.transform.position = newPosition;
+            HoverPlatform platform = target.GetComponent<HoverPlatform>();
+            if (!platform.IsOccupied()) {
+                hoverObject.SetActive(true);
+                // Mueve el objeto flotante justo por encima del objeto objetivo
+                Vector3 newPosition = target.position;
+                //newPosition.y += target.GetComponent<Renderer>().bounds.extents.y + hoverObject.GetComponent<Renderer>().bounds.extents.y;
+                newPosition.y = platform.Height;
+                hoverObject.transform.position = newPosition;
+            }
         }
     }
 

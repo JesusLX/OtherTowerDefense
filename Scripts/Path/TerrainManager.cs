@@ -8,8 +8,9 @@ public class TerrainManager : Singleton<TerrainManager> {
     public GameObject endTerrain;
 
     public TerrainChecker terrainChecker;
-    public float terrainSize = 20f; // Tamaño del terreno (asumimos cuadrado)
-
+    public int terrainSize = 20; // Tamaño del terreno (asumimos cuadrado)
+    public int terrainCount = 0;
+    public bool canBuild = true;
     private void Start() {
         Init();
     }
@@ -18,6 +19,7 @@ public class TerrainManager : Singleton<TerrainManager> {
         StartCoroutine(CallSpawnFromAllDoors());
     }
     public void OnDoorClicked(Door clickedDoor) {
+        canBuild = false;
         terrainChecker.transform.position = clickedDoor.terrain.transform.position;
         Vector3 targetPosition = CalculatePosition(clickedDoor, terrainChecker.gameObject);
         List<CollisionInfo> collisions = terrainChecker.Check(targetPosition);
@@ -45,11 +47,12 @@ public class TerrainManager : Singleton<TerrainManager> {
         CalculateRotation(clickedDoor, newTerrain, doorCount);
         var newExitDoor = GetExitDoor(clickedDoor, newTerrain);
 
+
         newExitDoor.point.AddPoint(clickedDoor.point);
         clickedDoor.point.previousPoints.Add(newExitDoor.point);
-        Debug.Log("Clicker door "+clickedDoor.point.previousPoints.Count,clickedDoor.point);
+        Debug.Log("Clicker door " + clickedDoor.point.previousPoints.Count, clickedDoor.point);
         //Debug.Log("Entrando a DeactiveOcupedDoors.---------------------", newTerrain);
-
+        terrainCount++;
         StartCoroutine(DeactiveDoors(newTerrain.GetComponent<BlockTerrain>(), clickedDoor.terrain));
         //}
 
@@ -59,6 +62,7 @@ public class TerrainManager : Singleton<TerrainManager> {
         //lastTerrain.DeactiveOcupedDoors();
         newTerrain.DeactiveOcupedDoors();
         newTerrain.DeactiveTouchedOcupedDoors();
+        canBuild = true;
         //  EnemyManager.Instance.SpawnGroup(EnemyManager.Instance.GetRandomGroup());
     }
     public Spawner GetRandomSpawner() {
@@ -78,17 +82,22 @@ public class TerrainManager : Singleton<TerrainManager> {
         // Lógica para decidir qué tipo de terreno instanciar
         int doorCount = 0;
         int wallCount = 0;
+
         List<Vector3> doorDirections = new List<Vector3>();
         List<Vector3> wallDirections = new List<Vector3>();
 
-        foreach (CollisionInfo collision in collisions) {
-            if (collision.objectType == Door.DoorType.Entrance || collision.objectType == Door.DoorType.Exit) {
-                doorCount++;
-                doorDirections.Add(collision.direction);
-            } else if (collision.objectType == Door.DoorType.Wall) {
-                wallCount++;
-                wallDirections.Add(collision.direction);
+        if (terrainCount < terrainSize) {
+            foreach (CollisionInfo collision in collisions) {
+                if (collision.objectType == Door.DoorType.Entrance || collision.objectType == Door.DoorType.Exit) {
+                    doorCount++;
+                    doorDirections.Add(collision.direction);
+                } else if (collision.objectType == Door.DoorType.Wall) {
+                    wallCount++;
+                    wallDirections.Add(collision.direction);
+                }
             }
+        } else {
+            wallCount = 3;
         }
         // Basado en doorCount y wallCount, decide qué tipo de terreno instanciar
         List<GameObject> posiblesTerrains;
@@ -161,7 +170,7 @@ public class TerrainManager : Singleton<TerrainManager> {
         }
         if (posiblesTerrains == null)
             return null;
-        var newTerrain = posiblesTerrains[Random.Range(0, posiblesTerrains.Count - 1)];
+        var newTerrain = posiblesTerrains[Random.Range(0, posiblesTerrains.Count)];
         Debug.Log("doorCount = " + doorCount + ", wallCount = " + wallCount, newTerrain);
         return newTerrain;
 
@@ -169,6 +178,7 @@ public class TerrainManager : Singleton<TerrainManager> {
     }
     private Door GetExitDoor(Door clickedDoor, GameObject terrain) {
         var exitDoor = terrain.GetComponent<BlockTerrain>().TouchDoor(clickedDoor);
+        if (exitDoor == null) return null;
         terrain.GetComponent<BlockTerrain>().ResetDoors();
         exitDoor.doorType = Door.DoorType.Exit;
         terrain.GetComponent<BlockTerrain>().RePath();
@@ -219,13 +229,13 @@ public class TerrainManager : Singleton<TerrainManager> {
         var touchDoor = terrain.TouchDoor(clickedDoor);
         while ((checkDoor && touchDoor != null) == false) {
             doorsCount--;
-            if (doorsCount < 0) {
-                break;
-            }
             terrain.transform.Rotate(0, 90, 0);
             tmpTouchCount = touchDoors;
             checkDoor = terrain.CheckDoors(tmpTouchCount);
             touchDoor = terrain.TouchDoor(clickedDoor);
+            if (doorsCount < 0) {
+                break;
+            }
         }
     }
 
@@ -237,13 +247,13 @@ public class TerrainManager : Singleton<TerrainManager> {
         return newTerrain.transform.position + direction * GridManager.Instance.cellSize;
     }
     private void Update() {
-        if (Input.GetKeyUp(KeyCode.Space)) {
+        if (Input.GetKey(KeyCode.Space) && canBuild) {
             var terrains = new List<BlockTerrain>(FindObjectsByType<BlockTerrain>(FindObjectsSortMode.None));
             terrains = terrains.FindAll(t => t.GetActiveDoorsCount() > 0);
             if (terrains.Count > 0) {
 
-                var terrain = terrains[Random.Range(0, terrains.Count - 1)];
-                Door door = terrain.GetActiveDoors()[Random.Range(0, terrain.GetActiveDoorsCount() - 1)];
+                var terrain = terrains[Random.Range(0, terrains.Count)];
+                Door door = terrain.GetActiveDoors()[Random.Range(0, terrain.GetActiveDoorsCount())];
                 terrain.OnDoorClicked(door);
             }
 

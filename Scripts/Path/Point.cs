@@ -29,7 +29,7 @@ public class Point : MonoBehaviour {
     }
     public Point GetPreviousPoint() {
         if (previousPoints.Count > 0) {
-            return previousPoints[Random.Range(0, previousPoints.Count - 1)];
+            return previousPoints[Random.Range(0, previousPoints.Count)];
         }
         return null;
     }

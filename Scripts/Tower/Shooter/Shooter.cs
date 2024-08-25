@@ -64,7 +64,7 @@ public class Shooter : MonoBehaviour {
                     var bullet = bulletsPool.Play(null, shootTransform.position, Quaternion.identity).GameObject.GetComponent<Bullet>();
                     if (randomTarget) {
                         if (attacker.detector.DetectedObjects.Count > 0) {
-                            var tmpTarget = attacker.detector.DetectedObjects[Random.Range(0, attacker.detector.DetectedObjects.Count - 1)];
+                            var tmpTarget = attacker.detector.DetectedObjects[Random.Range(0, attacker.detector.DetectedObjects.Count)];
                             bullet.target = tmpTarget;
                         }
                     } else {

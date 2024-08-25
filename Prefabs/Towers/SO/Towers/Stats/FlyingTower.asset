@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a58c5d83629d1d14b8254e4423a05ace, type: 3}
   m_Name: FlyingTower
   m_EditorClassIdentifier: 
-  timeBetweenShots: 0.1
-  timeBetweenRounds: 1
-  shotsPerRound: 1
+  timeBetweenShots: 0.05
+  timeBetweenRounds: 0.5
+  shotsPerRound: 3

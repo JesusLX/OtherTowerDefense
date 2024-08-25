@@ -222,8 +222,8 @@ Camera:
   m_GameObject: {fileID: 385778262}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.47058824, g: 0.6745098, b: 0.98039216, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -591,7 +591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 821456394059952646, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       propertyPath: towerPools.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 821456394059952646, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       propertyPath: 'towerPools.Array.data[2]'
@@ -613,13 +613,17 @@ PrefabInstance:
       propertyPath: 'towerPools.Array.data[6]'
       value: 
       objectReference: {fileID: 11400000, guid: a05787f922bfea343b727dc97959338f, type: 2}
+    - target: {fileID: 821456394059952646, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
+      propertyPath: 'towerPools.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 33511e51cd32375418da4472103555af, type: 2}
     - target: {fileID: 2341140031139967288, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 5069381513789220066, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       propertyPath: terrains.Array.size
-      value: 10
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5069381513789220066, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       propertyPath: 'terrains.Array.data[0]'
@@ -652,23 +656,27 @@ PrefabInstance:
     - target: {fileID: 5069381513789220066, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       propertyPath: 'terrains.Array.data[7]'
       value: 
-      objectReference: {fileID: 8489294584890074864, guid: 3b979bdcd4601d942b495217e5d99a76, type: 3}
+      objectReference: {fileID: 8489294584890074864, guid: b1ede2751ae41d9409bb5a97abf15cb1, type: 3}
     - target: {fileID: 5069381513789220066, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       propertyPath: 'terrains.Array.data[8]'
       value: 
-      objectReference: {fileID: 8489294584890074864, guid: 8c803af770d3c7f44a78645bf7eafb2a, type: 3}
+      objectReference: {fileID: 8489294584890074864, guid: 3b979bdcd4601d942b495217e5d99a76, type: 3}
     - target: {fileID: 5069381513789220066, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       propertyPath: 'terrains.Array.data[9]'
       value: 
-      objectReference: {fileID: 8489294584890074864, guid: 0547976a8d057b6429b3ef0fe8ce4ab4, type: 3}
+      objectReference: {fileID: 8489294584890074864, guid: a9e1dd3e161b48d41824ab4f04fb8f80, type: 3}
     - target: {fileID: 5069381513789220066, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       propertyPath: 'terrains.Array.data[10]'
       value: 
-      objectReference: {fileID: 8489294584890074864, guid: dc2a26d7a2773114bad77707ebc17bbf, type: 3}
+      objectReference: {fileID: 8489294584890074864, guid: 8c803af770d3c7f44a78645bf7eafb2a, type: 3}
     - target: {fileID: 5069381513789220066, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       propertyPath: 'terrains.Array.data[11]'
       value: 
-      objectReference: {fileID: 8489294584890074864, guid: 9e12d67f2b13bc140b897cbc95e2c0e2, type: 3}
+      objectReference: {fileID: 8489294584890074864, guid: 0547976a8d057b6429b3ef0fe8ce4ab4, type: 3}
+    - target: {fileID: 5069381513789220066, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
+      propertyPath: 'terrains.Array.data[12]'
+      value: 
+      objectReference: {fileID: 8489294584890074864, guid: 189f5fcd5257cb54cb94e23dca6e7229, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -676,6 +684,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2341140031139967288, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6647739466079693493}
+    - targetCorrespondingSourceObject: {fileID: 2341140031139967288, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6647739466079693498}
   m_SourcePrefab: {fileID: 100100000, guid: 67e3a5d8c31516d42a25a21d0bf6cd2e, type: 3}
 --- !u!1 &6647739466079693492 stripped
 GameObject:
@@ -714,6 +725,29 @@ MonoBehaviour:
       time: 1
       count: 1
     groupLevel: 0
+--- !u!114 &6647739466079693498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6647739466079693492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 890783bbafcdda54f86216ff58169ebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 8571820651097027460, guid: eb018ba53c0c8d6448ac1b21ba51effc, type: 3}
+  - {fileID: 8571820651097027460, guid: 6e0a000c8d852ee4ca4ac208d49a06aa, type: 3}
+  - {fileID: 8571820651097027460, guid: 2dd1ca0697b12c44297543b20637ba1c, type: 3}
+  - {fileID: 8571820651097027460, guid: d777b639e4a9cb540a75dd05cded274b, type: 3}
+  - {fileID: 8571820651097027460, guid: 948e011da7230fb4ab260b855b5a4439, type: 3}
+  - {fileID: 8571820651097027460, guid: 2d4ed904106c7b3438eebd1ce7ec6c3b, type: 3}
+  - {fileID: 8571820651097027460, guid: 310675a728ddc7d419276ade62ed379f, type: 3}
+  - {fileID: 8571820651097027460, guid: c4babd3f48705a24f85d304c31d75a20, type: 3}
+  - {fileID: 8571820651097027460, guid: dd569c2df3df2314fabb6b5605321f28, type: 3}
+  - {fileID: 8571820651097027460, guid: a936574206d58fc489e89f67d7113bd1, type: 3}
 --- !u!1001 &7078112698781897609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -897,7 +931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4086230063218113705, guid: 285edb8ce91dacf4ea25c95a28c91d13, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -8.000122
+      value: -8.000244
       objectReference: {fileID: 0}
     - target: {fileID: 6145500841661188971, guid: 285edb8ce91dacf4ea25c95a28c91d13, type: 3}
       propertyPath: m_IsActive
